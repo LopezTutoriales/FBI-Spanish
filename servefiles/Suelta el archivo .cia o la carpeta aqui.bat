@@ -1,5 +1,5 @@
 @ECHO OFF
-set /p DSIP="Enter the IP of your 3DS: "
+set /p DSIP="Introduce la IP de tu Nintendo 3DS: "
 for %%a in (%*) do (
 	if "%%~xa"==".cia" (
 		python "%~dp0servefiles.py" %DSIP% "%%~a"
