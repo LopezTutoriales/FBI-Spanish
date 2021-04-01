@@ -71,8 +71,8 @@ void error_panic(const char* s, ...) {
 
     PrintConsole* console = consoleInit(GFX_TOP, NULL);
 
-    const char* header = "¡FBI ha encontrado un error fatal!";
-    const char* footer = "Pulsar cualquier botón para salir";
+    const char* header = "¡FBI encontro un error fatal!";
+    const char* footer = "Presiona cualquier boton para salir.";
 
     printf("\x1b[0;0H");
     for(int i = 0; i < console->consoleWidth; i++) {
