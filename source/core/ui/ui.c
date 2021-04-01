@@ -42,13 +42,13 @@ void ui_exit() {
 ui_view* ui_create() {
     ui_view* view = (ui_view*) calloc(1, sizeof(ui_view));
     if(view == NULL) {
-        error_panic("Failed to allocate UI view.");
+        error_panic("Fallo al asignar la vista \nde la interfaz.");
         return NULL;
     }
 
     Result res = 0;
     if(R_FAILED(res = svcCreateEvent(&view->active, RESET_STICKY))) {
-        error_panic("Failed to create view active event: 0x%08lX", res);
+        error_panic("Fallo al crear la vista de \nevento activo: 0x%08lX", res);
 
         free(view);
         return NULL;
@@ -224,7 +224,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "CTR NAND: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "NAND 3DS: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -236,7 +236,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "TWL NAND: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "NAND DSi: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -248,7 +248,7 @@ static void ui_draw_top(ui_view* ui) {
             }
 
             u64 size = (u64) resource.freeClusters * (u64) resource.clusterSize;
-            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "TWL Photo: %.1f %s",
+            snprintf(currBuffer, sizeof(ui_free_space_buffer) - (currBuffer - ui_free_space_buffer), "Fotos DSi: %.1f %s",
                      ui_get_display_size(size), ui_get_display_size_units(size));
             currBuffer += strlen(currBuffer);
         }
@@ -400,15 +400,15 @@ double ui_get_display_size(u64 size) {
 
 const char* ui_get_display_size_units(u64 size) {
     if(size >= 1024 * 1024 * 1024) {
-        return "GiB";
+        return "GB";
     }
 
     if(size >= 1024 * 1024) {
-        return "MiB";
+        return "MB";
     }
 
     if(size >= 1024) {
-        return "KiB";
+        return "KB";
     }
 
     return "B";

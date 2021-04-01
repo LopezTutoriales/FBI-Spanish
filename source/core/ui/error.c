@@ -15,71 +15,71 @@
 static const char* level_to_string(Result res) {
     switch(R_LEVEL(res)) {
         case RL_SUCCESS:
-            return "Success";
+            return "Exito";
         case RL_INFO:
-            return "Info";
+            return "Informacion";
         case RL_FATAL:
             return "Fatal";
         case RL_RESET:
-            return "Reset";
+            return "Reiniciar";
         case RL_REINITIALIZE:
-            return "Reinitialize";
+            return "Reinicializar";
         case RL_USAGE:
-            return "Usage";
+            return "Uso";
         case RL_PERMANENT:
-            return "Permanent";
+            return "Permanente";
         case RL_TEMPORARY:
-            return "Temporary";
+            return "Temporal";
         case RL_STATUS:
-            return "Status";
+            return "Estado";
         default:
-            return "<unknown>";
+            return "<Desconocido>";
     }
 }
 
 static const char* summary_to_string(Result res) {
     switch(R_SUMMARY(res)) {
         case RS_SUCCESS:
-            return "Success";
+            return "Exito";
         case RS_NOP:
-            return "Nop";
+            return "No";
         case RS_WOULDBLOCK:
-            return "Would block";
+            return "Bloquearia";
         case RS_OUTOFRESOURCE:
-            return "Out of resource";
+            return "Sin recursos";
         case RS_NOTFOUND:
-            return "Not found";
+            return "No encontrado";
         case RS_INVALIDSTATE:
-            return "Invalid state";
+            return "Estado no valido";
         case RS_NOTSUPPORTED:
-            return "Not supported";
+            return "No soportado";
         case RS_INVALIDARG:
-            return "Invalid argument";
+            return "Argumento no valido";
         case RS_WRONGARG:
-            return "Wrong argument";
+            return "Argumento equivocado";
         case RS_CANCELED:
-            return "Canceled";
+            return "Cancelado";
         case RS_STATUSCHANGED:
-            return "Status changed";
+            return "Estado cambiado";
         case RS_INTERNAL:
-            return "Internal";
+            return "Interno";
         default:
-            return "<unknown>";
+            return "<Desconocido>";
     }
 }
 
 static const char* module_to_string(Result res) {
     switch(R_MODULE(res)) {
         case RM_COMMON:
-            return "Common";
+            return "Comun";
         case RM_KERNEL:
             return "Kernel";
         case RM_UTIL:
             return "Util";
         case RM_FILE_SERVER:
-            return "File server";
+            return "Servidor de archivos";
         case RM_LOADER_SERVER:
-            return "Loader server";
+            return "Servidor cargador";
         case RM_TCB:
             return "TCB";
         case RM_OS:
@@ -139,7 +139,7 @@ static const char* module_to_string(Result res) {
         case RM_HIO:
             return "HIO";
         case RM_UPDATER:
-            return "Updater";
+            return "Actualizador";
         case RM_MIC:
             return "MIC";
         case RM_FND:
@@ -169,7 +169,7 @@ static const char* module_to_string(Result res) {
         case RM_NEX:
             return "NEX";
         case RM_FRIENDS:
-            return "Friends";
+            return "Amigos";
         case RM_RDT:
             return "RDT";
         case RM_APPLET:
@@ -189,17 +189,17 @@ static const char* module_to_string(Result res) {
         case RM_NGC:
             return "NGC";
         case RM_CARD:
-            return "CARD";
+            return "Tarjeta";
         case RM_CARDNOR:
             return "CARDNOR";
         case RM_SDMC:
             return "SDMC";
         case RM_BOSS:
-            return "BOSS";
+            return "Jefe";
         case RM_DBM:
             return "DBM";
         case RM_CONFIG:
-            return "Config";
+            return "Configuracion";
         case RM_PS:
             return "PS";
         case RM_CEC:
@@ -213,13 +213,13 @@ static const char* module_to_string(Result res) {
         case RM_CUP:
             return "CUP";
         case RM_GYROSCOPE:
-            return "Gyroscope";
+            return "Giroscopio";
         case RM_MCU:
             return "MCU";
         case RM_NS:
             return "NS";
         case RM_NEWS:
-            return "NEWS";
+            return "Noticias";
         case RM_RO:
             return "RO";
         case RM_GD:
@@ -229,7 +229,7 @@ static const char* module_to_string(Result res) {
         case RM_EC:
             return "EC";
         case RM_WEB_BROWSER:
-            return "Web browser";
+            return "Navegador";
         case RM_TEST:
             return "TEST";
         case RM_ENC:
@@ -263,9 +263,9 @@ static const char* module_to_string(Result res) {
         case RM_NFP:
             return "NFP";
         case RM_APPLICATION:
-            return "Application";
+            return "Aplicacion";
         default:
-            return "<unknown>";
+            return "<Desconocido>";
     }
 }
 
@@ -277,7 +277,7 @@ static const char* description_to_string(Result res) {
         case RM_KERNEL:
             switch(description) {
                 case 2:
-                    return "Invalid DMA buffer memory permissions";
+                    return "Permisos de memoria buffer DMA no validos";
                 default:
                     break;
             }
@@ -286,21 +286,21 @@ static const char* description_to_string(Result res) {
         case RM_OS:
             switch(description) {
                 case 1:
-                    return "Out of synchronization object";
+                    return "Objeto fuera de sincronizacion";
                 case 2:
-                    return "Out of shared memory objects";
+                    return "Fuera de la memoria compartida de objetos";
                 case 9:
-                    return "Out of session objects";
+                    return "Objetos fuera de sesion";
                 case 10:
-                    return "Not enough memory for allocation";
+                    return "Sin memoria para la asignacion";
                 case 20:
-                    return "Wrong permissions for unprivileged access";
+                    return "Permisos incorrectos para el acceso sin privilegios";
                 case 26:
-                    return "Session closed by remote process";
+                    return "Sesion cerrada por proceso remoto";
                 case 47:
-                    return "Invalid command header";
+                    return "Encabezado de comando no valido";
                 case 52:
-                    return "Max port connections exceeded";
+                    return "Maximo de conexiones de puerto excedidas";
                 default:
                     break;
             }
@@ -309,49 +309,49 @@ static const char* description_to_string(Result res) {
         case RM_FS:
             switch(description) {
                 case 101:
-                    return "Archive not mounted";
+                    return "Archivo no montado";
                 case 120:
-                    return "Doesn't exist / Failed to open";
+                    return "No existe / Fallo al abrir";
                 case 141:
-                    return "Game card not inserted";
+                    return "Tarjeta de juego no insertada";
                 case 171:
-                    return "Bus: Busy / Underrun";
+                    return "Bus: Ocupado / Sin datos";
                 case 172:
-                    return "Bus: Illegal function";
+                    return "Bus: Funcion ilegal";
                 case 190:
-                    return "Already exists / Failed to create";
+                    return "Ya existe / Fallo al crear";
                 case 210:
-                    return "Partition full";
+                    return "Tarjeta de memoria llena";
                 case 230:
-                    return "Illegal operation / File in use";
+                    return "Operacion ilegal / Archivo en uso";
                 case 231:
-                    return "Resource locked";
+                    return "Recurso bloqueado";
                 case 250:
-                    return "FAT operation denied";
+                    return "Operacion FAT denegada";
                 case 265:
-                    return "Bus: Timeout";
+                    return "Bus: Se acabo el tiempo";
                 case 331:
-                    return "Bus error / TWL partition invalid";
+                    return "Error de bus / NAND Nintendo DSi (TWL) no valida";
                 case 332:
-                    return "Bus: Stop bit error";
+                    return "Bus: Error de bit de parada";
                 case 391:
-                    return "Hash verification failure";
+                    return "Fallo de verificacion de hash";
                 case 392:
-                    return "RSA/Hash verification failure";
+                    return "Fallo de verificacion de RSA/Hash";
                 case 395:
-                    return "Invalid RomFS or save data block hash";
+                    return "Archivos de rom no validos o bloque de datos guardados";
                 case 630:
-                    return "Archive permission denied";
+                    return "Permiso de archivo denegado";
                 case 702:
-                    return "Invalid path / Inaccessible archive";
+                    return "Ruta no valida / Archivo inaccesible";
                 case 705:
-                    return "Offset out of bounds";
+                    return "Desplazamiento fuera del limite";
                 case 721:
-                    return "Reached file size limit";
+                    return "Limite de tamaño de archivo alcanzado";
                 case 760:
-                    return "Unsupported operation";
+                    return "Operacion no soportada";
                 case 761:
-                    return "ExeFS read size mismatch";
+                    return "Discrepancia en lectura de Archivos de ejecucion";
                 default:
                     break;
             }
@@ -360,11 +360,11 @@ static const char* description_to_string(Result res) {
         case RM_SRV:
             switch(description) {
                 case 5:
-                    return "Invalid service name length";
+                    return "Longitud de nombre del servicio no valido";
                 case 6:
-                    return "Service access denied";
+                    return "Acceso denegado al servicio";
                 case 7:
-                    return "String size mismatch";
+                    return "Discrepancia de tamaño del nombre";
                 default:
                     break;
             }
@@ -373,47 +373,47 @@ static const char* description_to_string(Result res) {
         case RM_AM:
             switch(description) {
                 case 4:
-                    return "Wrong installation state";
+                    return "Estado de instalacion incorrecto";
                 case 37:
-                    return "Invalid NCCH";
+                    return "NCCH no valido";
                 case 39:
-                    return "Invalid or outdated title version";
+                    return "Version de titulo no valida o desactualizado";
                 case 41:
-                    return "Error type 1";
+                    return "Error de tipo 1";
                 case 43:
-                    return "Database does not exist";
+                    return "La base de datos no existe";
                 case 44:
-                    return "Attempted to delete system title";
+                    return "Intento borrar un titulo de sistema";
                 case 101:
-                    return "Error type -1";
+                    return "Error de tipo -1";
                 case 102:
-                    return "Error type -2";
+                    return "Error de tipo -2";
                 case 103:
-                    return "Error type -3";
+                    return "Error de tipo -3";
                 case 104:
-                    return "Error type -4";
+                    return "Error de tipo -4";
                 case 105:
-                    return "Error type -5";
+                    return "Error de tipo -5";
                 case 106:
-                    return "Cert signature or hash check failed";
+                    return "Fallo de certificado o hash";
                 case 107:
-                    return "Error type -7";
+                    return "Error de tipo -7";
                 case 108:
-                    return "Error type -8";
+                    return "Error de tipo -8";
                 case 109:
-                    return "Error type -9";
+                    return "Error de tipo -9";
                 case 110:
-                    return "Error type -10";
+                    return "Error de tipo -10";
                 case 111:
-                    return "Error type -11";
+                    return "Error de tipo -11";
                 case 112:
-                    return "Error type -12";
+                    return "Error de tipo -12";
                 case 113:
-                    return "Error type -13";
+                    return "Error de tipo -13";
                 case 114:
-                    return "Error type -14";
+                    return "Error de tipo -14";
                 case 393:
-                    return "Invalid database";
+                    return "Base de datos no valida";
                 default:
                     break;
             }
@@ -422,13 +422,13 @@ static const char* description_to_string(Result res) {
         case RM_HTTP:
             switch(description) {
                 case 60:
-                    return "Failed to verify TLS certificate";
+                    return "Fallo al verificar el certificado TLS";
                 case 70:
-                    return "Network unavailable";
+                    return "Red no disponible";
                 case 102:
-                    return "Wrong context handle";
+                    return "Identificador de contexto incorrecto";
                 case 105:
-                    return "Request timed out";
+                    return "Tiempo de espera agotado";
                 default:
                     break;
             }
@@ -437,9 +437,9 @@ static const char* description_to_string(Result res) {
         case RM_SSL:
             switch(description) {
                 case 20:
-                    return "Untrusted RootCA";
+                    return "Certificado no es de confianza";
                 case 54:
-                    return "RootCertChain handle not found";
+                    return "No se encontro el identificador de RootCertChain";
                 default:
                     break;
             }
@@ -448,13 +448,13 @@ static const char* description_to_string(Result res) {
         case RM_SDMC:
             switch(description) {
                 case 1:
-                    return "Bus: Bit23 error";
+                    return "Bus: Error de Bit23";
                 case 2:
-                    return "Bus: RX ready error";
+                    return "Bus: Error de RX listo";
                 case 3:
-                    return "Bus: Bit28 error";
+                    return "Bus: Error de Bit28";
                 case 4:
-                    return "Bus: Bit27 error";
+                    return "Bus: Error de Bit27";
                 default:
                     break;
             }
@@ -463,7 +463,7 @@ static const char* description_to_string(Result res) {
         case RM_MVD:
             switch(description) {
                 case 271:
-                    return "Invalid configuration";
+                    return "Configuracion no valida";
                 default:
                     break;
             }
@@ -472,7 +472,7 @@ static const char* description_to_string(Result res) {
         case RM_NFC:
             switch(description) {
                 case 512:
-                    return "Invalid NFC state";
+                    return "Estado del NFC no valido";
                 default:
                     break;
             }
@@ -481,7 +481,7 @@ static const char* description_to_string(Result res) {
         case RM_QTM:
             switch(description) {
                 case 8:
-                    return "Camera busy";
+                    return "Camara ocupada";
                 default:
                     break;
             }
@@ -490,148 +490,148 @@ static const char* description_to_string(Result res) {
         case RM_APPLICATION:
             switch(res) {
                 case R_APP_INVALID_ARGUMENT:
-                    return "Invalid argument";
+                    return "Argumento no valido";
                 case R_APP_CANCELLED:
-                    return "Operation cancelled";
+                    return "Operacion cancelada";
                 case R_APP_SKIPPED:
-                    return "Operation skipped";
+                    return "Operacion omitida";
                 case R_APP_THREAD_CREATE_FAILED:
-                    return "Thread creation failed";
+                    return "Error al crear hilo";
                 case R_APP_PARSE_FAILED:
-                    return "Parse failed";
+                    return "Fallo al parsear";
                 case R_APP_BAD_DATA:
-                    return "Bad data";
+                    return "Datos malos";
                 case R_APP_HTTP_TOO_MANY_REDIRECTS:
-                    return "Too many redirects";
+                    return "Demadiados redireccionamientos";
                 default:
                     if(res >= R_APP_HTTP_ERROR_BASE && res < R_APP_HTTP_ERROR_END) {
                         switch(res - R_APP_HTTP_ERROR_BASE) {
                             case 100:
-                                return "HTTP 100: Continue";
+                                return "HTTP 100: Continuar";
                             case 101:
-                                return "HTTP 101: Switching Protocols";
+                                return "HTTP 101: Protocolos de commutacion";
                             case 102:
-                                return "HTTP 102: Processing";
+                                return "HTTP 102: Procesando";
                             case 103:
                                 return "HTTP 103: Early Hints";
                             case 200:
                                 return "HTTP 200: OK";
                             case 201:
-                                return "HTTP 201: Created";
+                                return "HTTP 201: Creado";
                             case 202:
-                                return "HTTP 202: Accepted";
+                                return "HTTP 202: Aceptado";
                             case 203:
-                                return "HTTP 203: Non-Authoritative Information";
+                                return "HTTP 203: Informacion no autorizada";
                             case 204:
-                                return "HTTP 204: No Content";
+                                return "HTTP 204: Sin contenido";
                             case 205:
-                                return "HTTP 205: Reset Content";
+                                return "HTTP 205: Restablecer contenido";
                             case 206:
-                                return "HTTP 206: Partial Content";
+                                return "HTTP 206: Contenido parcial";
                             case 207:
-                                return "HTTP 207: Multi-Status";
+                                return "HTTP 207: Multi-estado";
                             case 208:
-                                return "HTTP 208: Already Reported";
+                                return "HTTP 208: Ya informado";
                             case 226:
-                                return "HTTP 226: IM Used";
+                                return "HTTP 226: Estoy usado";
                             case 300:
-                                return "HTTP 300: Multiple Choices";
+                                return "HTTP 300: Multiples opciones";
                             case 301:
-                                return "HTTP 301: Moved Permanently";
+                                return "HTTP 301: Movido permanentemente";
                             case 302:
-                                return "HTTP 302: Found";
+                                return "HTTP 302: Encontrado";
                             case 303:
-                                return "HTTP 303: See Other";
+                                return "HTTP 303: Ver otros";
                             case 304:
-                                return "HTTP 304: Not Modified";
+                                return "HTTP 304: No modificado";
                             case 305:
-                                return "HTTP 305: Use Proxy";
+                                return "HTTP 305: Usar Proxy";
                             case 306:
-                                return "HTTP 306: Switch Proxy";
+                                return "HTTP 306: Cambiar proxy";
                             case 307:
-                                return "HTTP 307: Temporary Redirect";
+                                return "HTTP 307: Redireccionamiento temporal";
                             case 308:
-                                return "HTTP 308: Permanent Redirect";
+                                return "HTTP 308: Redireccionamiento permanente";
                             case 400:
-                                return "HTTP 400: Bad Request";
+                                return "HTTP 400: Solicitud incorrecta";
                             case 401:
-                                return "HTTP 401: Unauthorized";
+                                return "HTTP 401: No autorizado";
                             case 402:
-                                return "HTTP 402: Payment Required";
+                                return "HTTP 402: Pago requerido";
                             case 403:
-                                return "HTTP 403: Forbidden";
+                                return "HTTP 403: Prohibido";
                             case 404:
-                                return "HTTP 404: Not Found";
+                                return "HTTP 404: No encontrado";
                             case 405:
-                                return "HTTP 405: Method Not Allowed";
+                                return "HTTP 405: Metodo no permitido";
                             case 406:
-                                return "HTTP 406: Not Acceptable";
+                                return "HTTP 406: Inaceptable";
                             case 407:
-                                return "HTTP 407: Proxy Authentication Required";
+                                return "HTTP 407: Se requiere autenticacion proxy";
                             case 408:
-                                return "HTTP 408: Request Timeout";
+                                return "HTTP 408: Tiempo de peticion acabado";
                             case 409:
-                                return "HTTP 409: Conflict";
+                                return "HTTP 409: Conflicto";
                             case 410:
-                                return "HTTP 410: Gone";
+                                return "HTTP 410: Desaparecido";
                             case 411:
-                                return "HTTP 411: Length Required";
+                                return "HTTP 411: Longitud requerida";
                             case 412:
-                                return "HTTP 412: Precondition Failed";
+                                return "HTTP 412: Fallo condicion previa";
                             case 413:
-                                return "HTTP 413: Payload Too Large";
+                                return "HTTP 413: Payload demasiado grande";
                             case 414:
-                                return "HTTP 414: URI Too Long";
+                                return "HTTP 414: URI demasiado larga";
                             case 415:
-                                return "HTTP 415: Unsupported Media Type";
+                                return "HTTP 415: Tipo de medio no soportado";
                             case 416:
-                                return "HTTP 416: Range Not Satisfiable";
+                                return "HTTP 416: Rango no satisfactorio";
                             case 417:
-                                return "HTTP 417: Expectation Failed";
+                                return "HTTP 417: Expectativa fallida";
                             case 418:
-                                return "HTTP 418: I'm a teapot";
+                                return "HTTP 418: Soy una tetera";
                             case 421:
-                                return "HTTP 421: Misdirected Request";
+                                return "HTTP 421: Solicitud mal dirigida";
                             case 422:
-                                return "HTTP 422: Unprocessable Entity";
+                                return "HTTP 422: Entidad no procesable";
                             case 423:
-                                return "HTTP 423: Locked";
+                                return "HTTP 423: Bloqueado";
                             case 424:
-                                return "HTTP 424: Failed Dependency";
+                                return "HTTP 424: Dependencia fallida";
                             case 426:
-                                return "HTTP 426: Upgrade Required";
+                                return "HTTP 426: Se requiere actualizacion";
                             case 428:
-                                return "HTTP 428: Precondition Required";
+                                return "HTTP 428: Requisito previo";
                             case 429:
-                                return "HTTP 429: Too Many Requests";
+                                return "HTTP 429: Demasiadas solicitudes";
                             case 431:
-                                return "HTTP 431: Request Header Fields Too Large";
+                                return "HTTP 431: Solicitud de encabezados demasiado grandes";
                             case 451:
-                                return "HTTP 451: Unavailable For Legal Reasons";
+                                return "HTTP 451: No disponible por motivos legales";
                             case 500:
-                                return "HTTP 500: Internal Server Error";
+                                return "HTTP 500: Error interno del servidor";
                             case 501:
-                                return "HTTP 501: Not Implemented";
+                                return "HTTP 501: No implementado";
                             case 502:
-                                return "HTTP 502: Bad Gateway";
+                                return "HTTP 502: Puerta de enlace incorrecta";
                             case 503:
-                                return "HTTP 503: Service Unavailable";
+                                return "HTTP 503: Servicio no disponible";
                             case 504:
-                                return "HTTP 504: Gateway Timeout";
+                                return "HTTP 504: Tiempo agotado de puerta de enlace";
                             case 505:
-                                return "HTTP 505: HTTP Version Not Specified";
+                                return "HTTP 505: Version de HTTP no especificada";
                             case 506:
-                                return "HTTP 506: Variant Also Negotiates";
+                                return "HTTP 506: La variantes tambien negocia";
                             case 507:
-                                return "HTTP 507: Insufficient Storage";
+                                return "HTTP 507: Espacio insuficiente";
                             case 508:
-                                return "HTTP 508: Loop Detected";
+                                return "HTTP 508: Bucle detectado";
                             case 510:
-                                return "HTTP 510: Not Extended";
+                                return "HTTP 510: No extendido";
                             case 511:
-                                return "HTTP 511: Network Authentication Required";
+                                return "HTTP 511: Se requiere autenticacion de red";
                             default:
-                                return "HTTP: Unknown Response Code";
+                                return "HTTP: Codigo de respuesta desconocido";
                         }
                     } else if(res >= R_APP_CURL_ERROR_BASE && res < R_APP_CURL_ERROR_END) {
                         return curl_easy_strerror(res - R_APP_CURL_ERROR_BASE);
@@ -645,55 +645,55 @@ static const char* description_to_string(Result res) {
 
     switch(description) {
         case RD_SUCCESS:
-            return "Success";
+            return "Exito";
         case RD_TIMEOUT:
-            return "Timeout";
+            return "Se acabo el tiempo";
         case RD_OUT_OF_RANGE:
-            return "Out of range";
+            return "Fuera de rango";
         case RD_ALREADY_EXISTS:
-            return "Already exists";
+            return "Ya existe";
         case RD_CANCEL_REQUESTED:
-            return "Cancel requested";
+            return "Cancelar solicitado";
         case RD_NOT_FOUND:
-            return "Not found";
+            return "No encontrado";
         case RD_ALREADY_INITIALIZED:
-            return "Already initialized";
+            return "Ya inicializado";
         case RD_NOT_INITIALIZED:
-            return "Not initialized";
+            return "No inicializado";
         case RD_INVALID_HANDLE:
-            return "Invalid handle";
+            return "Identificador no valido";
         case RD_INVALID_POINTER:
-            return "Invalid pointer";
+            return "Puntero no valido";
         case RD_INVALID_ADDRESS:
-            return "Invalid address";
+            return "Direccion no valida";
         case RD_NOT_IMPLEMENTED:
-            return "Not implemented";
+            return "No se ha implementado";
         case RD_OUT_OF_MEMORY:
-            return "Out of memory";
+            return "Memoria insuficiente";
         case RD_MISALIGNED_SIZE:
-            return "Misaligned size";
+            return "Tamaño desalineado";
         case RD_MISALIGNED_ADDRESS:
-            return "Misaligned address";
+            return "Direccion desalineada";
         case RD_BUSY:
-            return "Busy";
+            return "Ocupado";
         case RD_NO_DATA:
-            return "No data";
+            return "Sin datos";
         case RD_INVALID_COMBINATION:
-            return "Invalid combination";
+            return "Combinacion no valida";
         case RD_INVALID_ENUM_VALUE:
-            return "Invalid enum value";
+            return "Valor de enumaracion no valido";
         case RD_INVALID_SIZE:
-            return "Invalid size";
+            return "Tamaño no valido";
         case RD_ALREADY_DONE:
-            return "Already done";
+            return "Ya hecho";
         case RD_NOT_AUTHORIZED:
-            return "Not authorized";
+            return "No autorizado";
         case RD_TOO_LARGE:
-            return "Too large";
+            return "Demasiado grande";
         case RD_INVALID_SELECTION:
-            return "Invalid selection";
+            return "Seleccion no valida";
         default:
-            return "<unknown>";
+            return "<Desconocido>";
     }
 }
 
@@ -754,7 +754,7 @@ ui_view* error_display_res(void* data, void (*drawTop)(ui_view* view, void* data
     int module = R_MODULE(result);
     int description = R_DESCRIPTION(result);
 
-    snprintf(errorData->fullText, 4096, "%s\nResult code: 0x%08lX\nLevel: %s (%d)\nSummary: %s (%d)\nModule: %s (%d)\nDesc: %s (%d)", textBuf, result, level_to_string(result), level, summary_to_string(result), summary, module_to_string(result), module, description_to_string(result), description);
+    snprintf(errorData->fullText, 4096, "%s\nCodigo: 0x%08lX\nNivel: %s (%d)\nResumen: %s (%d)\nModulo: %s (%d)\nDetalles: %s (%d)", textBuf, result, level_to_string(result), level, summary_to_string(result), summary, module_to_string(result), module, description_to_string(result), description);
 
     return prompt_display_notify("Error", errorData->fullText, COLOR_TEXT, errorData, error_draw_top, error_onresponse);
 }

@@ -45,7 +45,7 @@ static void kbd_update(ui_view* view, void* data, float bx1, float by1, float bx
 ui_view* kbd_display(const char* hint, const char* initialText, SwkbdType type, u32 features, SwkbdValidInput validation, u32 maxSize, void* data, void (*onResponse)(ui_view* view, void* data, SwkbdButton button, const char* response)) {
     kbd_data* kbdData = (kbd_data*) calloc(1, sizeof(kbd_data));
     if(kbdData == NULL) {
-        error_display(NULL, NULL, "Failed to allocate keyboard data.");
+        error_display(NULL, NULL, "Fallo al asignar los \ndatos del teclado.");
 
         return NULL;
     }
@@ -59,7 +59,7 @@ ui_view* kbd_display(const char* hint, const char* initialText, SwkbdType type, 
 
     kbdData->response = (char*) calloc(1, maxSize);
     if(kbdData->response == NULL) {
-        error_display(NULL, NULL, "Failed to allocate keyboard response buffer.");
+        error_display(NULL, NULL, "Fallo al asignar el buffer \nde respuesta del teclado.");
 
         free(kbdData);
         return NULL;
