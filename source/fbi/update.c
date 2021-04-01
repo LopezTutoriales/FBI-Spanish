@@ -66,16 +66,16 @@ static void update_check_update(ui_view* view, void* data, float* progress, char
     info_destroy(view);
 
     if(hasUpdate) {
-        action_install_url("Update FBI to the latest version?", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
+        action_install_url("¿Actualizar FBI?", updateURL, fs_get_3dsx_path(), NULL, NULL, NULL, NULL);
     } else {
         if(R_FAILED(res)) {
-            error_display_res(NULL, NULL, res, "Failed to check for update.");
+            error_display_res(NULL, NULL, res, "Fallo al comprobar actualizaciones.");
         } else {
-            prompt_display_notify("Success", "No updates available.", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("Exito", "No hay actualizaciones nuevas.", COLOR_TEXT, NULL, NULL, NULL);
         }
     }
 }
 
 void update_open() {
-    info_display("Checking For Updates", "", false, NULL, update_check_update, NULL);
+    info_display("Comprobando actualizaciones", "", false, NULL, update_check_update, NULL);
 }
