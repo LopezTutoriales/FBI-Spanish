@@ -59,7 +59,7 @@ static Result action_delete_tickets_restore(void* data, u32 index) {
 }
 
 static bool action_delete_tickets_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_delete_tickets_draw_top, res, "Failed to delete ticket(s).");
+    *errorView = error_display_res(data, action_delete_tickets_draw_top, res, "Fallo al borrar ticket(s).");
     return true;
 }
 
@@ -80,7 +80,7 @@ static void action_delete_tickets_update(ui_view* view, void* data, float* progr
         info_destroy(view);
 
         if(R_SUCCEEDED(deleteData->deleteInfo.result)) {
-            prompt_display_notify("Success", "Ticket(s) deleted.", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("Exito", "Ticket(s) borrado(s).", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         action_delete_tickets_free_data(deleteData);
@@ -102,9 +102,9 @@ static void action_delete_tickets_onresponse(ui_view* view, void* data, u32 resp
     if(response == PROMPT_YES) {
         Result res = task_data_op(&deleteData->deleteInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("Deleting", "Press B to cancel.", true, data, action_delete_tickets_update, action_delete_tickets_draw_top);
+            info_display("Borrando", "Pulsa B para cancelar.", true, data, action_delete_tickets_update, action_delete_tickets_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "Failed to initiate delete operation.");
+            error_display_res(NULL, NULL, res, "Fallo al iniciarlizar operacion de borrado.");
 
             action_delete_tickets_free_data(deleteData);
         }
@@ -148,9 +148,9 @@ static void action_delete_tickets_loading_update(ui_view* view, void* data, floa
             loadingData->deleteData->deleteInfo.total = linked_list_size(&loadingData->deleteData->contents);
             loadingData->deleteData->deleteInfo.processed = loadingData->deleteData->deleteInfo.total;
 
-            prompt_display_yes_no("Confirmation", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
+            prompt_display_yes_no("Confirmacion", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "Failed to populate ticket list.");
+            error_display_res(NULL, NULL, loadingData->popData.result, "Fallo al completar la \nlista de tickets.");
 
             action_delete_tickets_free_data(loadingData->deleteData);
         }
@@ -163,13 +163,13 @@ static void action_delete_tickets_loading_update(ui_view* view, void* data, floa
         svcSignalEvent(loadingData->popData.cancelEvent);
     }
 
-    snprintf(text, PROGRESS_TEXT_MAX, "Fetching ticket list...");
+    snprintf(text, PROGRESS_TEXT_MAX, "Obteniendo lista de tickets...");
 }
 
 static void action_delete_tickets_internal(linked_list* items, list_item* selected, const char* message, bool unused) {
     delete_tickets_data* data = (delete_tickets_data*) calloc(1, sizeof(delete_tickets_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate delete data.");
+        error_display(NULL, NULL, "Fallo al asignar los \ndatos para borrar.");
 
         return;
     }
@@ -195,7 +195,7 @@ static void action_delete_tickets_internal(linked_list* items, list_item* select
     if(unused) {
         delete_tickets_loading_data* loadingData = (delete_tickets_loading_data*) calloc(1, sizeof(delete_tickets_loading_data));
         if(loadingData == NULL) {
-            error_display(NULL, NULL, "Failed to allocate loading data.");
+            error_display(NULL, NULL, "Fallo al asignar los datos de carga.");
 
             action_delete_tickets_free_data(data);
             return;
@@ -208,28 +208,28 @@ static void action_delete_tickets_internal(linked_list* items, list_item* select
 
         Result listRes = task_populate_tickets(&loadingData->popData);
         if(R_FAILED(listRes)) {
-            error_display_res(NULL, NULL, listRes, "Failed to initiate ticket list population.");
+            error_display_res(NULL, NULL, listRes, "Fallo al llenar la \nlista de tickets.");
 
             free(loadingData);
             action_delete_tickets_free_data(data);
             return;
         }
 
-        info_display("Loading", "Press B to cancel.", false, loadingData, action_delete_tickets_loading_update, action_delete_tickets_loading_draw_top);
+        info_display("Cargando", "Pulsa B para cancelar.", false, loadingData, action_delete_tickets_loading_update, action_delete_tickets_loading_draw_top);
     } else {
         linked_list_add(&data->contents, selected);
 
         data->deleteInfo.total = 1;
         data->deleteInfo.processed = data->deleteInfo.total;
 
-        prompt_display_yes_no("Confirmation", message, COLOR_TEXT, data, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
+        prompt_display_yes_no("Confirmacion", message, COLOR_TEXT, data, action_delete_tickets_draw_top, action_delete_tickets_onresponse);
     }
 }
 
 void action_delete_ticket(linked_list* items, list_item* selected) {
-    action_delete_tickets_internal(items, selected, "Delete the selected ticket?", false);
+    action_delete_tickets_internal(items, selected, "¿Borrar el ticket seleccionado?", false);
 }
 
 void action_delete_tickets_unused(linked_list* items, list_item* selected) {
-    action_delete_tickets_internal(items, selected, "Delete all unused tickets?", true);
+    action_delete_tickets_internal(items, selected, "¿Borrar todos los tickets no utilizados?", true);
 }

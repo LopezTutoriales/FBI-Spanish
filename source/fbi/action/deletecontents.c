@@ -78,7 +78,7 @@ static Result action_delete_restore(void* data, u32 index) {
 }
 
 static bool action_delete_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_delete_draw_top, res, "Failed to delete content.");
+    *errorView = error_display_res(data, action_delete_draw_top, res, "Fallo al borrar contenido.");
     return true;
 }
 
@@ -105,7 +105,7 @@ static void action_delete_update(ui_view* view, void* data, float* progress, cha
         info_destroy(view);
 
         if(R_SUCCEEDED(deleteData->deleteInfo.result)) {
-            prompt_display_notify("Success", "Deleted.", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("Exito", "Borrado.", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         action_delete_free_data(deleteData);
@@ -127,9 +127,9 @@ static void action_delete_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
         Result res = task_data_op(&deleteData->deleteInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("Deleting", "Press B to cancel.", true, data, action_delete_update, action_delete_draw_top);
+            info_display("Borrando", "Presiona B para cancelar.", true, data, action_delete_update, action_delete_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "Failed to initiate delete operation.");
+            error_display_res(NULL, NULL, res, "Fallo al iniciarlizar la \naccion de borrar.");
 
             action_delete_free_data(deleteData);
         }
@@ -161,9 +161,9 @@ static void action_delete_loading_update(ui_view* view, void* data, float* progr
             loadingData->deleteData->deleteInfo.total = linked_list_size(&loadingData->deleteData->contents);
             loadingData->deleteData->deleteInfo.processed = loadingData->deleteData->deleteInfo.total;
 
-            prompt_display_yes_no("Confirmation", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_draw_top, action_delete_onresponse);
+            prompt_display_yes_no("Confirmacion", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_draw_top, action_delete_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "Failed to populate content list.");
+            error_display_res(NULL, NULL, loadingData->popData.result, "Fallo al completar la \nlista de contenido.");
 
             action_delete_free_data(loadingData->deleteData);
         }
@@ -176,13 +176,13 @@ static void action_delete_loading_update(ui_view* view, void* data, float* progr
         svcSignalEvent(loadingData->popData.cancelEvent);
     }
 
-    snprintf(text, PROGRESS_TEXT_MAX, "Fetching content list...");
+    snprintf(text, PROGRESS_TEXT_MAX, "Obteniendo lista de contenido...");
 }
 
 static void action_delete_internal(linked_list* items, list_item* selected, const char* message, bool recursive, bool includeBase, bool ciasOnly, bool ticketsOnly) {
     delete_data* data = (delete_data*) calloc(1, sizeof(delete_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate delete data.");
+        error_display(NULL, NULL, "Fallo al asignar los \ndatos de eliminacion.");
 
         return;
     }
@@ -192,7 +192,7 @@ static void action_delete_internal(linked_list* items, list_item* selected, cons
     file_info* targetInfo = (file_info*) selected->data;
     Result targetCreateRes = task_create_file_item(&data->targetItem, targetInfo->archive, targetInfo->path, targetInfo->attributes, false);
     if(R_FAILED(targetCreateRes)) {
-        error_display_res(NULL, NULL, targetCreateRes, "Failed to create target file item.");
+        error_display_res(NULL, NULL, targetCreateRes, "Fallo al crear el archivo \nde destino.");
 
         action_delete_free_data(data);
         return;
@@ -217,7 +217,7 @@ static void action_delete_internal(linked_list* items, list_item* selected, cons
 
     delete_loading_data* loadingData = (delete_loading_data*) calloc(1, sizeof(delete_loading_data));
     if(loadingData == NULL) {
-        error_display(NULL, NULL, "Failed to allocate loading data.");
+        error_display(NULL, NULL, "Fallo al asignar los \ndatos de carga.");
 
         action_delete_free_data(data);
         return;
@@ -237,32 +237,32 @@ static void action_delete_internal(linked_list* items, list_item* selected, cons
 
     Result listRes = task_populate_files(&loadingData->popData);
     if(R_FAILED(listRes)) {
-        error_display_res(NULL, NULL, listRes, "Failed to initiate content list population.");
+        error_display_res(NULL, NULL, listRes, "Fallo al llenar la lista \nde contenido.");
 
         free(loadingData);
         action_delete_free_data(data);
         return;
     }
 
-    info_display("Loading", "Press B to cancel.", false, loadingData, action_delete_loading_update, action_delete_loading_draw_top);
+    info_display("Cargando", "Presiona B para cancelar.", false, loadingData, action_delete_loading_update, action_delete_loading_draw_top);
 }
 
 void action_delete_file(linked_list* items, list_item* selected) {
-    action_delete_internal(items, selected, "Delete the selected file?", false, true, false, false);
+    action_delete_internal(items, selected, "¿Borrar archivo seleccionado?", false, true, false, false);
 }
 
 void action_delete_dir(linked_list* items, list_item* selected) {
-    action_delete_internal(items, selected, "Delete the current directory?", true, true, false, false);
+    action_delete_internal(items, selected, "¿Borrar directorio actual?", true, true, false, false);
 }
 
 void action_delete_dir_contents(linked_list* items, list_item* selected) {
-    action_delete_internal(items, selected, "Delete all contents of the current directory?", true, false, false, false);
+    action_delete_internal(items, selected, "¿Borrar todo el contenido del directorio actual?", true, false, false, false);
 }
 
 void action_delete_dir_cias(linked_list* items, list_item* selected) {
-    action_delete_internal(items, selected, "Delete all CIAs in the current directory?", false, false, true, false);
+    action_delete_internal(items, selected, "¿Borrar todos los CIAS del directorio actual?", false, false, true, false);
 }
 
 void action_delete_dir_tickets(linked_list* items, list_item* selected) {
-    action_delete_internal(items, selected, "Delete all tickets in the current directory?", false, false, false, true);
+    action_delete_internal(items, selected, "¿Borrar todos los tickets del directorio actual?", false, false, false, true);
 }

@@ -63,7 +63,7 @@ static Result action_delete_pending_titles_restore(void* data, u32 index) {
 }
 
 static bool action_delete_pending_titles_error(void* data, u32 index, Result res, ui_view** errorView) {
-    *errorView = error_display_res(data, action_delete_pending_titles_draw_top, res, "Failed to delete pending title.");
+    *errorView = error_display_res(data, action_delete_pending_titles_draw_top, res, "Fallo al borrar el \ntitulo pendiente.");
     return true;
 }
 
@@ -84,7 +84,7 @@ static void action_delete_pending_titles_update(ui_view* view, void* data, float
         info_destroy(view);
 
         if(R_SUCCEEDED(deleteData->deleteInfo.result)) {
-            prompt_display_notify("Success", "Pending title(s) deleted.", COLOR_TEXT, NULL, NULL, NULL);
+            prompt_display_notify("Exito", "Titulo(s) pendiente(s) borrado(s).", COLOR_TEXT, NULL, NULL, NULL);
         }
 
         action_delete_pending_titles_free_data(deleteData);
@@ -106,9 +106,9 @@ static void action_delete_pending_titles_onresponse(ui_view* view, void* data, u
     if(response == PROMPT_YES) {
         Result res = task_data_op(&deleteData->deleteInfo);
         if(R_SUCCEEDED(res)) {
-            info_display("Deleting Pending Title(s)", "Press B to cancel.", true, data, action_delete_pending_titles_update, action_delete_pending_titles_draw_top);
+            info_display("Borrando titulo(s) pendiente(s)", "Pulsa B para cancelar.", true, data, action_delete_pending_titles_update, action_delete_pending_titles_draw_top);
         } else {
-            error_display_res(NULL, NULL, res, "Failed to initiate delete operation.");
+            error_display_res(NULL, NULL, res, "Fallo al inicializar la \noperacion de borrado.");
 
             action_delete_pending_titles_free_data(deleteData);
         }
@@ -142,7 +142,7 @@ static void action_delete_pending_titles_loading_update(ui_view* view, void* dat
 
             prompt_display_yes_no("Confirmation", loadingData->message, COLOR_TEXT, loadingData->deleteData, action_delete_pending_titles_draw_top, action_delete_pending_titles_onresponse);
         } else {
-            error_display_res(NULL, NULL, loadingData->popData.result, "Failed to populate pending title list.");
+            error_display_res(NULL, NULL, loadingData->popData.result, "Fallo al completar la lista \nde titulos pendientes.");
 
             action_delete_pending_titles_free_data(loadingData->deleteData);
         }
@@ -155,13 +155,13 @@ static void action_delete_pending_titles_loading_update(ui_view* view, void* dat
         svcSignalEvent(loadingData->popData.cancelEvent);
     }
 
-    snprintf(text, PROGRESS_TEXT_MAX, "Fetching pending title list...");
+    snprintf(text, PROGRESS_TEXT_MAX, "Obteniendo lista de titulos pendientes...");
 }
 
 void action_delete_pending_titles(linked_list* items, list_item* selected, const char* message, bool all) {
     delete_pending_titles_data* data = (delete_pending_titles_data*) calloc(1, sizeof(delete_pending_titles_data));
     if(data == NULL) {
-        error_display(NULL, NULL, "Failed to allocate delete pending titles data.");
+        error_display(NULL, NULL, "Fallo al asignar los datos de \neliminacion de los titulos pendientes.");
 
         return;
     }
@@ -189,7 +189,7 @@ void action_delete_pending_titles(linked_list* items, list_item* selected, const
     if(all) {
         delete_pending_titles_loading_data* loadingData = (delete_pending_titles_loading_data*) calloc(1, sizeof(delete_pending_titles_loading_data));
         if(loadingData == NULL) {
-            error_display(NULL, NULL, "Failed to allocate loading data.");
+            error_display(NULL, NULL, "Fallo al asignar los \ndatos de carga.");
 
             action_delete_pending_titles_free_data(data);
             return;
@@ -202,28 +202,28 @@ void action_delete_pending_titles(linked_list* items, list_item* selected, const
 
         Result listRes = task_populate_pending_titles(&loadingData->popData);
         if(R_FAILED(listRes)) {
-            error_display_res(NULL, NULL, listRes, "Failed to initiate pending title list population.");
+            error_display_res(NULL, NULL, listRes, "Fallo al llenar la lista \nde titulos pendientes.");
 
             free(loadingData);
             action_delete_pending_titles_free_data(data);
             return;
         }
 
-        info_display("Loading", "Press B to cancel.", false, loadingData, action_delete_pending_titles_loading_update, action_delete_pending_titles_loading_draw_top);
+        info_display("Cargando", "Pulsa B para cancelar.", false, loadingData, action_delete_pending_titles_loading_update, action_delete_pending_titles_loading_draw_top);
     } else {
         linked_list_add(&data->contents, selected);
 
         data->deleteInfo.total = 1;
         data->deleteInfo.processed = data->deleteInfo.total;
 
-        prompt_display_yes_no("Confirmation", message, COLOR_TEXT, data, action_delete_pending_titles_draw_top, action_delete_pending_titles_onresponse);
+        prompt_display_yes_no("Confirmacion", message, COLOR_TEXT, data, action_delete_pending_titles_draw_top, action_delete_pending_titles_onresponse);
     }
 }
 
 void action_delete_pending_title(linked_list* items, list_item* selected) {
-    action_delete_pending_titles(items, selected, "Delete the selected pending title?", false);
+    action_delete_pending_titles(items, selected, "¿Borrar el titulo pendiente seleccionado?", false);
 }
 
 void action_delete_all_pending_titles(linked_list* items, list_item* selected) {
-    action_delete_pending_titles(items, selected, "Delete all pending titles?", true);
+    action_delete_pending_titles(items, selected, "¿Borrar todos los titulos pendientes?", true);
 }

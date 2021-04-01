@@ -61,18 +61,18 @@ static void action_extract_smdh_update(ui_view* view, void* data, float* progres
     info_destroy(view);
 
     if(R_SUCCEEDED(res)) {
-        prompt_display_notify("Success", "SMDH extracted.", COLOR_TEXT, info, task_draw_title_info, NULL);
+        prompt_display_notify("Exito", "SMDH extraido.", COLOR_TEXT, info, task_draw_title_info, NULL);
     } else {
-        error_display_res(info, task_draw_title_info, res, "Failed to extract SMDH.");
+        error_display_res(info, task_draw_title_info, res, "Fallo al extraer SMDH.");
     }
 }
 
 static void action_extract_smdh_onresponse(ui_view* view, void* data, u32 response) {
     if(response == PROMPT_YES) {
-        info_display("Extracting SMDH", "", false, data, action_extract_smdh_update, task_draw_title_info);
+        info_display("Extrayendo SMDH", "", false, data, action_extract_smdh_update, task_draw_title_info);
     }
 }
 
 void action_extract_smdh(linked_list* items, list_item* selected) {
-    prompt_display_yes_no("Confirmation", "Extract the SMDH of the selected title?", COLOR_TEXT, selected->data, task_draw_title_info, action_extract_smdh_onresponse);
+    prompt_display_yes_no("Confirmacion", "¿Extraer el SMDH del titulo seleccionado?", COLOR_TEXT, selected->data, task_draw_title_info, action_extract_smdh_onresponse);
 }
