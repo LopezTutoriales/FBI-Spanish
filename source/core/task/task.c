@@ -33,14 +33,14 @@ void task_init() {
     Result res = 0;
 
     if(R_FAILED(res = svcCreateEvent(&task_pause_event, RESET_STICKY))) {
-        error_panic("Failed to create task pause event: 0x%08lX", res);
+        error_panic("Fallo al crear el evento de \npausa de la tarea: 0x%08lX", res);
         return;
     }
 
     if(R_FAILED(res = svcCreateEvent(&task_suspend_event, RESET_STICKY))) {
         svcCloseHandle(task_pause_event);
 
-        error_panic("Failed to create task suspend event: 0x%08lX", res);
+        error_panic("Fallo al crear el evento de \nsuspension de la tarea: 0x%08lX", res);
         return;
     }
 
