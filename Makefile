@@ -1,6 +1,6 @@
 TARGET := 3DS
 
-NAME := FBI Esp
+NAME := FBI ESP
 
 BUILD_DIR := build
 OUTPUT_DIR := output
@@ -21,8 +21,8 @@ VERSION_MAJOR := $(word 1, $(VERSION_PARTS))
 VERSION_MINOR := $(word 2, $(VERSION_PARTS))
 VERSION_MICRO := $(word 3, $(VERSION_PARTS))
 
-DESCRIPTION := Administrador de títulos de código abierto.
-AUTHOR := Steveice10 (Traducido por López Tutoriales)
+DESCRIPTION := Administrador de titulos. Trad: Lopez Tutoriales
+AUTHOR := Steveice10
 
 PRODUCT_CODE := CTR-P-CFBI
 UNIQUE_ID := 0xF8001
